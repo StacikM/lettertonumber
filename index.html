@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>letter to number</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px auto;
+      max-width: 700px;
+      line-height: 1.6;
+    }
+    input, button, textarea {
+      padding: 8px;
+      font-size: 1rem;
+    }
+    textarea {
+      width: 100%;
+      height: 120px;
+      margin-top: 10px;
+    }
+    .map {
+      margin: 20px 0;
+      padding: 10px;
+      background: #f3f3f3;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>letter to number</h1>
+  <p>This cipher assigns numbers that visually resemble letters. Example rules:</p>
+  <div class="map">
+    <strong>8 → A</strong><br>
+    <strong>1 → I</strong><br>
+    0 → O<br>
+    3 → E<br>
+    5 → S<br>
+    2 → Z<br>
+    4 → h (sideways similarity)<br>
+    6 → G<br>
+    7 → T
+  </div>
+
+  <h3>Encrypt</h3>
+  <input id="plain" placeholder="Enter text" />
+  <button onclick="encrypt()">Encrypt</button>
+  <textarea id="encrypted" readonly></textarea>
+
+  <h3>Decrypt</h3>
+  <input id="cipher" placeholder="Enter numbers" />
+  <button onclick="decrypt()">Decrypt</button>
+  <textarea id="decrypted" readonly></textarea>
+
+  <script>
+    const map = {
+      'a': '8',
+      'b': '13',
+      'c': '(',
+      'd': '0)',
+      'e': '3',
+      'f': '7=',
+      'g': '6',
+      'h': '4',
+      'i': '1',
+      'j': '7_',
+      'k': '1<',
+      'l': '1_',
+      'm': '^^',
+      'n': '^/',
+      'o': '0',
+      'p': '9',
+      'q': '0,',
+      'r': '12',
+      's': '5',
+      't': '7',
+      'u': '(_)',
+      'v': '\/','
+      'w': '\/\/',
+      'x': '><',
+      'y': "'\/",
+      'z': '2'
+    };
+
+    const reverseMap = Object.fromEntries(
+      Object.entries(map).map(([k, v]) => [v, k])
+    );
+
+    function encrypt() {
+      const input = document.getElementById('plain').value.toLowerCase();
+      let out = '';
+      for (const ch of input) {
+        out += map[ch] || ch;
+      }
+      document.getElementById('encrypted').value = out;
+    }
+
+    function decrypt() {
+      const input = document.getElementById('cipher').value;
+      let out = '';
+      for (const ch of input) {
+        out += reverseMap[ch] || ch;
+      }
+      document.getElementById('decrypted').value = out;
+    }
+  </script>
+</body>
+</html>
