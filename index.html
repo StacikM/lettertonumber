@@ -53,57 +53,60 @@
   <button onclick="decrypt()">Decrypt</button>
   <textarea id="decrypted" readonly></textarea>
 
-  <script>
-    const map = {
-      'a': '8',
-      'b': '13',
-      'c': '(',
-      'd': '0)',
-      'e': '3',
-      'f': '7=',
-      'g': '6',
-      'h': '4',
-      'i': '1',
-      'j': '7_',
-      'k': '1<',
-      'l': '1_',
-      'm': '^^',
-      'n': '^/',
-      'o': '0',
-      'p': '9',
-      'q': '0,',
-      'r': '12',
-      's': '5',
-      't': '7',
-      'u': '(_)',
-      'v': '\/','
-      'w': '\/\/',
-      'x': '><',
-      'y': "'\/",
-      'z': '2'
-    };
+<script>
+const map = {
+'a': '8',
+'b': '13',
+'c': '(',
+'d': '0)',
+'e': '3',
+'f': '7=',
+'g': '6',
+'h': '4',
+'i': '1',
+'j': '7_',
+'k': '1<',
+'l': '1_',
+'m': '^^',
+'n': '^/',
+'o': '0',
+'p': '9',
+'q': '0,',
+'r': '12',
+'s': '5',
+'t': '7',
+'u': '(_)',
+'v': '\\/',
+'w': '\\/\\/',
+'x': '><',
+'y': "'\\/",
+'z': '2'
+};
 
-    const reverseMap = Object.fromEntries(
-      Object.entries(map).map(([k, v]) => [v, k])
-    );
 
-    function encrypt() {
-      const input = document.getElementById('plain').value.toLowerCase();
-      let out = '';
-      for (const ch of input) {
-        out += map[ch] || ch;
-      }
-      document.getElementById('encrypted').value = out;
-    }
+const reverseMap = Object.fromEntries(
+Object.entries(map).map(([k, v]) => [v, k])
+);
 
-    function decrypt() {
-      const input = document.getElementById('cipher').value;
-      let out = '';
-      for (const ch of input) {
-        out += reverseMap[ch] || ch;
-      }
-      document.getElementById('decrypted').value = out;
-    }
-  </script>
+
+function encrypt() {
+const input = document.getElementById('plain').value.toLowerCase();
+let out = '';
+for (const ch of input) {
+out += map[ch] || ch;
+}
+document.getElementById('encrypted').value = out;
+}
+
+
+function decrypt() {
+const input = document.getElementById('cipher').value;
+let out = '';
+for (const ch of input) {
+out += reverseMap[ch] || ch;
+}
+document.getElementById('decrypted').value = out;
+}
+</script>
 </body>
 </html>
