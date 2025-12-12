@@ -89,25 +89,27 @@ Object.entries(map).map(([k, v]) => [v, k])
 );
 
 
-function encrypt() {
-const input = document.getElementById('plain').value.toLowerCase();
-let parts = [];
-for (const ch of input) {
-parts.push(map[ch] || ch);
-}
-document.getElementById('encrypted').value = parts.join('|');
-}
+const SEPARATOR = '\u200B'; // invisible separator
 
+function encrypt() {
+  const input = document.getElementById('plain').value.toLowerCase();
+  let parts = [];
+  for (const ch of input) {
+    parts.push(map[ch] || ch);
+  }
+  document.getElementById('encrypted').value = parts.join(SEPARATOR);
+}
 
 function decrypt() {
-const input = document.getElementById('cipher').value;
-let out = '';
-const tokens = input.split('|');
-for (const tk of tokens) {
-out += reverseMap[tk] || tk;
+  const input = document.getElementById('cipher').value;
+  let out = '';
+  const tokens = input.split(SEPARATOR);
+  for (const tk of tokens) {
+    out += reverseMap[tk] || tk;
+  }
+  document.getElementById('decrypted').value = out;
 }
-document.getElementById('decrypted').value = out;
-}
+
 </script>
 </body>
 </html>
